@@ -1,9 +1,8 @@
-'use client'
-import db from '@/firebase'
 import { XCircle } from '@phosphor-icons/react'
 import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
-import { FormEvent, useEffect, useState } from 'react'
-import './globals.css'
+import { FormEvent, useEffect, useState, useRef } from 'react'
+import db from './firebase'
+import './index.css'
 
 interface Doc {
   id: string
@@ -11,7 +10,12 @@ interface Doc {
 }
 
 export default function Home() {
+  return Main()
+}
+
+function Main() {
   const [name, setName] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
   const [names, setNames] = useState<Doc[]>([])
 
   async function GetDocs() {
@@ -55,6 +59,10 @@ export default function Home() {
       await GetDocs()
     }
     fetchData()
+
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
   }, [])
 
   return (
@@ -65,6 +73,7 @@ export default function Home() {
           <input
             type="text"
             placeholder="What do you have to do today?"
+            ref={inputRef}
             className="text-black mx-8 w-9/12 px-4 py-2"
             value={name}
             onChange={(e) => setName(e.target.value)}
