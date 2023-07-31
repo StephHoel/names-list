@@ -1,7 +1,7 @@
 {
-  // "extends": "next/core-web-vitals"
-  // "extends": "@rocketseat/eslint-config/node"
-  "extends": "@rocketseat/eslint-config/react",
+  "extends": [
+    "@rocketseat/eslint-config/react"
+  ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
     "react-hooks/exhaustive-deps": "off"
